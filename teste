@@ -1,0 +1,191 @@
+Inicializando projeto no Spring Boot
+
+
+package teste.waltermelow.api;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ApiApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ApiApplication.class, args);
+	}
+Criando projeto
+
+class QuickSort {
+
+    public static void quickSort(int[] array) {
+        quickSort(array, 0, array.length - 1);
+    }
+
+    private static void quickSort(int[] array, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(array, low, high);
+            quickSort(array, low, pivotIndex - 1);
+            quickSort(array, pivotIndex + 1, high);
+        }
+    }
+
+    private static int partition(int[] array, int low, int high) {
+        int pivot = array[high];
+        int i = low - 1;
+        for (int j = low; j < high; j++) {
+            if (array[j] <= pivot) {
+                i++;
+                swap(array, i, j);
+            }
+        }
+        swap(array, i + 1, high);
+        return i + 1;
+    }
+
+    private static void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        int[] array = {3, 6, 8, 10, 1, 2, 1};
+        quickSort(array);
+        for (int i : array) {
+            System.out.print(i + " ");
+        }
+    }
+
+package teste.waltermelow.api;
+
+// Classe base Pessoa
+public abstract class Pessoa {
+    protected String nome;
+    protected String documento;
+
+    public Pessoa(String nome, String documento) {
+        this.nome = nome;
+        this.documento = documento;
+    }
+
+    // Getters e setters
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+}
+
+// Classe Cliente que herda de Pessoa
+public class Cliente extends Pessoa {
+    private int codigoCliente;
+
+    public Cliente(String nome, String documento, int codigoCliente) {
+        super(nome, documento);
+        this.codigoCliente = codigoCliente;
+    }
+
+    // Getters e setters
+    public int getCodigoCliente() {
+        return codigoCliente;
+    }
+
+    public void setCodigoCliente(int codigoCliente) {
+        this.codigoCliente = codigoCliente;
+    }
+}
+
+// Classe Funcionario que herda de Pessoa
+public class Funcionario extends Pessoa {
+    private String cargo;
+
+    public Funcionario(String nome, String documento, String cargo) {
+        super(nome, documento);
+        this.cargo = cargo;
+    }
+
+    // Getters e setters
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+}
+
+
+Pessoa: Classe abstrata base contendo atributos comuns a Cliente e Funcionario, como nome e documento.
+Cliente: Herda de Pessoa e adiciona o atributo codigoCliente.
+Funcionario: Herda de Pessoa e adiciona o atributo cargo.
+NotaFiscal: Contém os atributos numeroNota e valorTotal, além das referências aos objetos Cliente e Funcionario que representam os relacionamentos.
+
+Pessoa é a classe base de onde Cliente e Funcionario herdam, utilizando herança para evitar redundância de atributos comuns.
+NotaFiscal tem associações com Cliente e Funcionario, pois cada nota fiscal está associada a um cliente específico e a um funcionário que realizou a venda.
+Essa modelagem permite uma estrutura clara e organizada, facilitando a manutenção e a expansão do sistema.
+
+
+
+// Classe NotaFiscal
+public class NotaFiscal {
+    private int numeroNota;
+    private double valorTotal;
+    private Cliente cliente;
+    private Funcionario funcionario;
+
+    public NotaFiscal(int numeroNota, double valorTotal, Cliente cliente, Funcionario funcionario) {
+        this.numeroNota = numeroNota;
+        this.valorTotal = valorTotal;
+        this.cliente = cliente;
+        this.funcionario = funcionario;
+    }
+
+    // Getters e setters
+    public int getNumeroNota() {
+        return numeroNota;
+    }
+
+    public void setNumeroNota(int numeroNota) {
+        this.numeroNota = numeroNota;
+    }
+
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+}
+
+
+
+
+
+
+
